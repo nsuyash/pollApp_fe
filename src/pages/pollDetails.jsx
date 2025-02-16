@@ -37,7 +37,7 @@ const PollDetails = () => {
         try {
             await axios.delete(`${API_BASE_URL}/${pollId}`);
             alert("Poll deleted successfully!");
-            navigate("/"); // Redirect to home page after deletion
+            navigate("/"); 
         } catch (error) {
             console.error("Error deleting poll:", error);
         }
