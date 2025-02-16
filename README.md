@@ -22,8 +22,7 @@ A simple poll creation and voting application built with React (frontend) and Ex
 Clone the repository:
 
 ```sh
-git clone https://github.com/your-repo/poll-app-backend.git
-cd poll-app-backend
+git clone https://github.com/nsuyash/pollApp_be.git
 ```
 
 Install dependencies:
@@ -43,8 +42,8 @@ npm start
 Clone the repository:
 
 ```sh
-git clone https://github.com/your-repo/poll-app-frontend.git
-cd poll-app-frontend
+git clone https://github.com/nsuyash/pollApp_fe.git
+cd cactro_fe
 ```
 
 Install dependencies:
@@ -116,7 +115,7 @@ DELETE /polls/:pollId
 ## Deployment
 
 **Backend:** Hosted on Vercel: [https://poll-app-be.vercel.app](https://poll-app-be.vercel.app)  
-**Frontend:** Deployed on Netlify/Vercel (Provide URL)
+**Frontend:** Deployed on Vercel [https://poll-app-fe.vercel.app/](https://poll-app-fe.vercel.app/)
 
 ## License
 
