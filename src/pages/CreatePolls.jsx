@@ -44,6 +44,14 @@ const CreatePolls = () => {
         setQuestions(updatedQuestions);
     };
 
+    const removeOption = (qIndex, oIndex) => {
+        const updatedQuestions = [...questions];
+        if (updatedQuestions[qIndex].options.length > 2) {
+            updatedQuestions[qIndex].options.splice(oIndex, 1);
+            setQuestions(updatedQuestions);
+        }
+    };
+
     const addQuestion = () => {
         setQuestions([...questions, { question: "", options: ["", ""] }]);
     };
@@ -65,31 +73,13 @@ const CreatePolls = () => {
         }
     };
 
-    const votePoll = async (pollId, questionIndex, optionIndex) => {
-        try {
-            await axios.post(`${API_BASE_URL}/${pollId}/vote`, { questionIndex, optionIndex });
-            fetchPolls();
-        } catch (error) {
-            console.error("Error voting on poll:", error);
-        }
-    };
-
-    const deletePoll = async (pollId) => {
-        try {
-            await axios.delete(`${API_BASE_URL}/${pollId}`);
-            setPolls(polls.filter(poll => poll._id !== pollId));
-        } catch (error) {
-            console.error("Error deleting poll:", error);
-        }
-    };
-
     return (
         <>
             <Header />
             <div className="container my-5">
                 <div className="row">
                     <div className="col-md-9">
-                    <h2 className="mb-4">CREATE A POLL</h2>
+                        <h2 className="mb-4">CREATE A POLL</h2>
                         <div className="card p-4 shadow-sm">
                             <div className="mb-3">
                                 <label className="form-label">Poll Name</label>
@@ -105,6 +95,9 @@ const CreatePolls = () => {
                                     {q.options.map((option, oIndex) => (
                                         <div className="input-group mb-2" key={oIndex}>
                                             <input type="text" className="form-control" value={option} onChange={(e) => handleOptionChange(qIndex, oIndex, e.target.value)} />
+                                            {q.options.length > 2 && (
+                                                <button className="btn btn-danger btn-sm" onClick={() => removeOption(qIndex, oIndex)}>×</button>
+                                            )}
                                         </div>
                                     ))}
                                     <button className="btn btn-secondary btn-sm" onClick={() => addOption(qIndex)}>+ Add Option</button>
@@ -115,7 +108,7 @@ const CreatePolls = () => {
                         </div>
                     </div>
                     <div className="col-md-3">
-                    <h2>ACTIVE POLL</h2>
+                        <h2>ACTIVE POLL</h2>
                         <div className="list-group mt-3">
                             {polls.map(poll => (
                                 <Link 
