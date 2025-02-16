@@ -56,6 +56,14 @@ const CreatePolls = () => {
         setQuestions([...questions, { question: "", options: ["", ""] }]);
     };
 
+    const removeQuestion = (qIndex) => {
+        if (questions.length > 1) {
+            const updatedQuestions = [...questions];
+            updatedQuestions.splice(qIndex, 1);
+            setQuestions(updatedQuestions);
+        }
+    };
+
     const createPoll = async () => {
         try {
             const response = await axios.post(API_BASE_URL, {
@@ -87,11 +95,14 @@ const CreatePolls = () => {
                             </div>
                             {questions.map((q, qIndex) => (
                                 <div key={qIndex} className="mb-4 border-bottom pb-3">
-                                    <div className="mb-2">
+                                    <div className="mb-2 d-flex justify-content-between align-items-center">
                                         <label className="form-label">Question {qIndex + 1}</label>
-                                        <input type="text" className="form-control" value={q.question} onChange={(e) => handleQuestionChange(qIndex, e.target.value)} />
+                                        {questions.length > 1 && (
+                                            <button className="btn btn-danger btn-sm" onClick={() => removeQuestion(qIndex)}>×</button>
+                                        )}
                                     </div>
-                                    <label className="form-label">Options</label>
+                                    <input type="text" className="form-control" value={q.question} onChange={(e) => handleQuestionChange(qIndex, e.target.value)} />
+                                    <label className="form-label mt-2">Options</label>
                                     {q.options.map((option, oIndex) => (
                                         <div className="input-group mb-2" key={oIndex}>
                                             <input type="text" className="form-control" value={option} onChange={(e) => handleOptionChange(qIndex, oIndex, e.target.value)} />
