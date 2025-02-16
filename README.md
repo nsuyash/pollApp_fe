@@ -1,4 +1,4 @@
-# Poll App
+# Quick Polling App
 
 A simple poll creation and voting application built with React (frontend) and Express.js (backend).
 
